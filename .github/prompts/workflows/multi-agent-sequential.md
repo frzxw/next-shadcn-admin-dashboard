@@ -56,6 +56,20 @@ powershell -ExecutionPolicy Bypass -File scripts/start-codex-workers.ps1 `
 	-NoLaunch
 ```
 
+### One-Command Cycle
+Run assignment + launch together:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run-codex-cycle.ps1
+```
+
+Dry-run cycle (no Codex launch, prompt files only):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run-codex-cycle.ps1 `
+	-NoLaunch
+```
+
 ## 5) Worker Loop
 1. Execute one task card only.
 2. Validate with task-specific command.
