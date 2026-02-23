@@ -70,6 +70,21 @@ powershell -ExecutionPolicy Bypass -File scripts/run-codex-cycle.ps1 `
 	-NoLaunch
 ```
 
+Run fully autonomous cycle including merge phase:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run-codex-cycle.ps1 `
+	-AutoMerge
+```
+
+Run autonomous cycle and push integration branch after merge:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/run-codex-cycle.ps1 `
+	-AutoMerge `
+	-PushIntegration
+```
+
 ## 5) Worker Loop
 1. Execute one task card only.
 2. Validate with task-specific command.
@@ -87,6 +102,21 @@ git rebase split/<initiative>
 
 git switch split/<initiative>
 git merge --ff-only agent/a
+```
+
+Autonomous merge helper:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/merge-codex-workers.ps1 `
+	-BoardPath .github/prompts/workflows/task-board.example.yaml
+```
+
+Preview only (no changes):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/merge-codex-workers.ps1 `
+	-BoardPath .github/prompts/workflows/task-board.example.yaml `
+	-WhatIf
 ```
 
 ## 7) Conflict Policy
