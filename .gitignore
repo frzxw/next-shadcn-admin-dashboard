@@ -35,3 +35,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# generated multi-agent workflow artifacts
+.github/prompts/workflows/assignments.current.md
+.github/prompts/workflows/runtime/
