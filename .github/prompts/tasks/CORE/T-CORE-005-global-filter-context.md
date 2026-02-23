@@ -1,0 +1,42 @@
+# Task ID: T-CORE-005
+
+## Title
+Global Filter Context — Agent, Platform, Date Range
+
+## Area
+CORE
+
+## Requirement IDs
+- REQ-CORE-003
+
+## Depends On
+- T-CORE-003
+- T-AGENT-001
+
+## Description
+Implement a global filter context system for the creator workspace that allows filtering dashboard views by agent, platform, and date range. Provide an agent selector dropdown, platform filter, and date range picker as Tier 3 contextual tools. Store filter state in URL search params for shareability.
+
+Reference: specs/04-information-architecture.md §3, specs/02-requirements.md REQ-CORE-003.
+
+## Acceptance Criteria
+- Agent selector dropdown renders available agents for workspace
+- Platform filter supports all platforms (Instagram, TikTok, YouTube, X)
+- Date range picker with presets (7d, 14d, 30d, 90d, custom)
+- Filter state persisted in URL search params
+- Filter context consumable by child pages/components
+- Right-aligned in page header area (specs/04-information-architecture.md §3)
+- Global filters do not mix with local tools
+
+## Technical Notes
+- Use URL search params for filter state (not client-side store)
+- Agent data loaded server-side
+- Date range picker uses `src/components/ui/calendar.tsx`
+- Consistent spacing tokens per specs/16-design-system-alignment.md
+- Filter context available as server component prop or hook
+
+## Definition of Done
+- Requirement satisfied: REQ-CORE-003
+- Type-safe filter types
+- No console errors
+- URL state synchronization verified
+- UI follows shared UI primitives rules
