@@ -4,38 +4,35 @@ workers:
   - id: A
     branch: agent/a
     allowed_paths:
-      - src/app/
-      - src/navigation/
+      - src/server/services/ai/
   - id: B
     branch: agent/b
     allowed_paths:
-      - src/components/
-      - src/lib/
+      - src/server/services/db/
 
 tasks:
-  - id: T-100
-    title: "Add route shell placeholder"
-    type: chore
-    scope: app
-    goal: "Create route placeholders for a new dashboard subsection"
+  - id: T-CORE-010
+    title: "SPIKE — AI Provider Selection & Routing Policy"
+    type: feat
+    scope: core
+    goal: "Research and decide AI provider routing and adapter policy"
     depends_on: []
     allowed_paths:
-      - src/app/
+      - src/server/services/ai/
     validation:
       - npm run check
     commit:
-      subject: "chore(app): add dashboard subsection placeholders"
+      subject: "feat(core): research spike ai provider selection routing policy"
 
-  - id: T-101
-    title: "Extract UI helper"
-    type: refactor
-    scope: components
-    goal: "Extract repeated formatting helper into shared utility"
+  - id: T-CORE-001
+    title: "Database Schema Foundation — Workspaces, Users, Members"
+    type: feat
+    scope: core
+    goal: "Set up ORM and foundational workspace/user/member schema"
     depends_on: []
     allowed_paths:
-      - src/components/
-      - src/lib/
+      - src/server/services/db/
     validation:
       - npm run check
     commit:
-      subject: "refactor(components): extract shared formatting helper"
+      subject: "feat(core): implement database schema foundation workspaces users members"

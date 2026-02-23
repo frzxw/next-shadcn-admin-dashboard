@@ -1,0 +1,4 @@
+# One completed task ID per line
+# Example:
+# T-CORE-001
+# T-CORE-002
