@@ -1,0 +1,44 @@
+﻿id: T-AUD-002
+title: "Loyalty Index Computation Service"
+type: feat
+scope: "aud"
+goal: "Implement the loyalty index computation service. Formula: loyalty_index = 0.6 * returning_viewer_pct + 0.4 * repeat_engagement_rate. Integrated into the KPI snapshot aggregation pipeline. Produces per-agent loyalty trend data. Reference: specs/06-kpi-definitions.md §3.3."
+
+requirements:
+  - "REQ-AUD-002"
+
+depends_on:
+  - "T-AUD-001"
+  - "T-INSIGHT-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "repeat_engagement_rate derived from post_metrics"
+  - "Integrated into T-INSIGHT-001 aggregation service"
+  - "Value normalized for display"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Loyalty index computed per agent per snapshot"
+  - "Formula matches spec: 0.6 * returning_viewer_pct + 0.4 * repeat_engagement_rate"
+  - "Stored in agent_kpi_snapshots.loyalty_index"
+  - "Handles missing data gracefully (null if insufficient)"
+  - "Trend data available for charting"
+  - "Requirement satisfied: REQ-AUD-002"
+  - "Type-safe"
+  - "No console errors"
+  - "Formula verified"
+
+commit:
+  subject: "feat(aud): implement loyalty index computation service"
+  body:
+    - "Implements T-AUD-002"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

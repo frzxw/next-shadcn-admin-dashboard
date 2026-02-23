@@ -1,0 +1,45 @@
+﻿id: T-AUDIT-003
+title: "AI Action Audit Logging"
+type: feat
+scope: "audit"
+goal: "Implement mandatory audit logging for every AI call with trace metadata: feature, prompt_hash, model, model_version, provider, latency, actor, success."
+
+requirements:
+  - "REQ-AUDIT-001"
+
+depends_on:
+  - "T-AUDIT-001"
+  - "T-AI-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Integrate inside orchestrator boundary, not UI"
+  - "Prompt hash generated consistently"
+  - "Log after response for accurate latency"
+  - "Preserve security constraints for secrets"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Every AI generation/scoring request logs an audit entry"
+  - "Required fields captured: feature_name, prompt_hash, model, model_version, provider, latency_ms, actor_user_id, success_flag"
+  - "Raw prompt text is not logged in audit"
+  - "AI trace_id returned and linkable to downstream entities"
+  - "Failure cases also logged"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded for all AI calls"
+
+commit:
+  subject: "feat(audit): implement ai action audit logging"
+  body:
+    - "Implements T-AUDIT-003"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

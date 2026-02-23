@@ -1,0 +1,48 @@
+﻿id: T-AI-006
+title: "Outline Generation Server Action"
+type: feat
+scope: "ai"
+goal: "Implement server action that generates structured outlines with permission checks, schema validation, memory-aware context injection, and audited trace metadata."
+
+requirements:
+  - "REQ-AI-002"
+
+depends_on:
+  - "T-AI-001"
+  - "T-AI-005"
+  - "T-COLLAB-002"
+  - "T-AUDIT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Generation model route configured by orchestrator"
+  - "Keep scoring-specific settings separate"
+  - "Token budget enforcement applied"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Session and role validation enforced"
+  - "Request validated with outline schema"
+  - "Context injection follows memory rules"
+  - "Orchestrator invoked and returns typed outline"
+  - "Errors handled safely; retry possible"
+  - "Audit entry written for every call"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(ai): implement outline generation server action"
+  body:
+    - "Implements T-AI-006"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

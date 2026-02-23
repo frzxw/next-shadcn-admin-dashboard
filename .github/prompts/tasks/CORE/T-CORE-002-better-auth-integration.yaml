@@ -1,0 +1,50 @@
+﻿id: T-CORE-002
+title: "Better Auth Integration"
+type: feat
+scope: "core"
+goal: "Integrate Better Auth for session management and authentication. Configure OAuth providers and optional email/password flow. Establish the server-side session validation boundary at `src/server/services/auth/`. Ensure sessions are validated in App Router server components and server actions. Reference: specs/03-architecture.md §4.1."
+
+requirements:
+  - "REQ-CORE-002"
+  - "REQ-NFR-003"
+
+depends_on:
+  - "T-CORE-001"
+
+allowed_paths:
+  - src/server/services/auth/
+  - src\server\services\auth/
+
+constraints:
+  - "Server-side only — no client-side auth state"
+  - "Session must be validated before any server action"
+  - "Integration boundary: `src/server/services/auth/`"
+  - "Must work with existing Next.js App Router layout"
+  - "Do not create new CosmosClient-style singletons — reuse singleton pattern"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Better Auth installed and configured"
+  - "OAuth provider(s) configured (at least one)"
+  - "Session validation utility available for server actions"
+  - "`src/server/services/auth/betterAuth.ts` adapter created"
+  - "Login/logout flows functional"
+  - "Session accessible in server components"
+  - "REQ-NFR-003 (unauthorized access prevention) addressed at auth layer"
+  - "Requirement satisfied: REQ-CORE-002, REQ-NFR-003"
+  - "Type-safe session types exported"
+  - "No console errors"
+  - "Auth flows tested (login, logout, session check)"
+  - "Server-side session enforcement present"
+
+commit:
+  subject: "feat(core): implement better auth integration"
+  body:
+    - "Implements T-CORE-002"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

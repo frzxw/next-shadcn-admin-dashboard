@@ -1,16 +1,17 @@
-# Task Prompts
+# Task Cards
 
-Store approved, execution-ready implementation prompts here.
+Store approved, execution-ready task cards here.
 
-## Naming Convention
-`YYYY-MM-DD-<feature>-implementation.md`
+## Canonical Format
+- Use YAML task cards matching `../templates/task-card.template.yaml`.
+- One task card per file using this naming convention:
+	- `T-<AREA>-<NNN>-<slug>.yaml`
 
 ## Minimum Content
-- Linked spec path
-- Requirement IDs in scope
-- Explicit non-goals
-- Verification checklist
-- Risk notes
+- `id`, `title`, `type`, `scope`, `goal`
+- `requirements`, `depends_on`, `allowed_paths`
+- `constraints`, `validation`, `done_when`
+- `commit` and `handoff`
 
 ## Gate
-Do not add a task prompt unless its source feature spec is in Approved status.
+Do not add a task card unless its source feature spec is in Approved status.

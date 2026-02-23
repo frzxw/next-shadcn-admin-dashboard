@@ -1,0 +1,44 @@
+﻿id: T-AUDIT-002
+title: "Hash-Chaining Tamper Evidence"
+type: feat
+scope: "audit"
+goal: "Add tamper-evident hash chaining to audit logs using `hash = SHA256(current_entry_data + previous_hash)` per workspace chain."
+
+requirements:
+  - "REQ-NFR-007"
+
+depends_on:
+  - "T-AUDIT-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use stable canonical serialization before hashing"
+  - "Hash chain should be deterministic"
+  - "Fail-safe behavior defined if previous hash missing (genesis entry)"
+  - "Consider background verification job for integrity checks"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Each new audit entry stores `hash` and `previous_hash`"
+  - "Chain validation utility detects modified records"
+  - "Hash input excludes mutable/system-volatile fields not part of event payload"
+  - "Workspace-level chain continuity preserved"
+  - "Verification command/function available for forensic checks"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Tamper-evidence verified with test scenario"
+
+commit:
+  subject: "feat(audit): implement hash-chaining tamper evidence"
+  body:
+    - "Implements T-AUDIT-002"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

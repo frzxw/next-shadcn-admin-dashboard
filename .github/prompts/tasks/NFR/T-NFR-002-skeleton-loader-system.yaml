@@ -1,0 +1,44 @@
+﻿id: T-NFR-002
+title: "Skeleton Loading & Perceived Latency"
+type: feat
+scope: "nfr"
+goal: "Add consistent skeleton/loading states for all async dashboard cards and data-heavy views to meet perceived speed targets."
+
+requirements:
+  - "REQ-NFR-002"
+
+depends_on:
+  - "T-CORE-006"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use shared `skeleton` primitive"
+  - "Keep layout stable during loading to reduce jank"
+  - "Pair with server component data fetching"
+  - "Ensure accessibility semantics for loading regions"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Shared skeleton variants for KPI cards, charts, tables, panels"
+  - "Loading states shown immediately on route transition"
+  - "No blank or flashing states in async areas"
+  - "Error fallback UI present for failed fetches"
+  - "Home/Insights/Agent dashboards include skeleton coverage"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(nfr): implement skeleton loading perceived latency"
+  body:
+    - "Implements T-NFR-002"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

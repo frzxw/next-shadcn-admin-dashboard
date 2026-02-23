@@ -1,0 +1,48 @@
+﻿id: T-MEMORY-004
+title: "Memory Promotion Workflow"
+type: feat
+scope: "memory"
+goal: "Implement the candidate → durable memory promotion workflow. Creator reviews candidate memories, approves or rejects. Approval: updates tier to durable, appends summary to MEMORY.md (new version), pushes to Supermemory with durable tag. Rejection logged with reason. Reference: specs/08-memory-system.md §5.3."
+
+requirements:
+  - "REQ-MEMORY-003"
+
+depends_on:
+  - "T-MEMORY-003"
+  - "T-COLLAB-002"
+  - "T-AUDIT-005"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Promotion requires Creator role (specs/10-permissions-matrix.md §4.6)"
+  - "MEMORY.md update creates new agent_file version"
+  - "Supermemory tag update from candidate → durable"
+  - "Conflict detection: check for contradictory durable memories (specs/08-memory-system.md §9)"
+  - "Memory size limits enforced on durable injection cap"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`promoteMemory` server action: Creator only"
+  - "On approval: tier → durable, MEMORY.md version bump, Supermemory update"
+  - "On rejection: tier → rejected (or deleted), reason logged"
+  - "pending promotion queue displayed in Memory UI"
+  - "Confidence threshold auto-suggestion (optional Creator override)"
+  - "Audit log for promotion/rejection (via T-AUDIT-005)"
+  - "Requirement satisfied: REQ-MEMORY-003"
+  - "Type-safe"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(memory): implement memory promotion workflow"
+  body:
+    - "Implements T-MEMORY-004"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

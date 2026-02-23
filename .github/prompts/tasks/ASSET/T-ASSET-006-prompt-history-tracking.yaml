@@ -1,0 +1,45 @@
+﻿id: T-ASSET-006
+title: "Prompt History Tracking"
+type: feat
+scope: "asset"
+goal: "Implement prompt history tracking: store AI generation prompts along with their outputs and associate them with assets. Enables comparing prompt variations, output quality, and performance correlation. Reference: specs/01-product-spec.md §5.7 Prompt History."
+
+requirements:
+  - "REQ-ASSET-004"
+
+depends_on:
+  - "T-ASSET-001"
+  - "T-AI-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Prompt hash for deduplication (matches audit log pattern)"
+  - "Do NOT store raw prompts in audit log (hash only) — prompt_history is separate"
+  - "This is a first-party feature table, not audit"
+  - "Performance correlation deferred until post linking"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`prompt_history` table: id, agent_id, prompt_text, prompt_hash, output_summary, asset_id (nullable), model, model_version, created_at"
+  - "Prompt history tab in Assets page"
+  - "View prompts with their outputs"
+  - "Filter by agent, date, model"
+  - "Compare outputs from similar prompts"
+  - "Link to asset if output generated an asset"
+  - "Requirement satisfied: REQ-ASSET-004"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(asset): implement prompt history tracking"
+  body:
+    - "Implements T-ASSET-006"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

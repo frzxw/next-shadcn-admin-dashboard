@@ -1,0 +1,43 @@
+﻿id: T-ASSET-004
+title: "Visual Similarity Grouping Service"
+type: feat
+scope: "asset"
+goal: "Implement visual similarity grouping for assets. Uses embedding-based similarity to group visually similar images together. Enables creators to identify visual consistency or detect unintended variations across their asset library. Reference: specs/01-product-spec.md §5.7 Media Vault."
+
+requirements:
+  - "REQ-ASSET-002"
+
+depends_on:
+  - "T-ASSET-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Visual embeddings reuse same infrastructure as visual consistency engine (Phase 2)"
+  - "For MVP: can use simple perceptual hash or deferred to Phase 2 with placeholder"
+  - "If Phase 2: create the interface/contract now, implementation later"
+  - "Async processing (don't block upload)"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Service computes visual embeddings for image assets"
+  - "Groups assets by embedding similarity (configurable threshold)"
+  - "Similarity groups displayed in asset library"
+  - "Manual override: merge or split groups"
+  - "Works for image assets only (not video MVP)"
+  - "Requirement satisfied: REQ-ASSET-002"
+  - "Type-safe interfaces defined"
+  - "No console errors"
+
+commit:
+  subject: "feat(asset): implement visual similarity grouping service"
+  body:
+    - "Implements T-ASSET-004"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,40 @@
+﻿id: T-CORE-012
+title: "SPIKE — Permission Matrix Finalization"
+type: feat
+scope: "core"
+goal: "Finalize the exact permission matrix for each role (Creator, Editor, Analyst, Viewer) across all modules. Review the draft matrix in specs/10-permissions-matrix.md and resolve any ambiguities, especially conditional permissions for Editor role. Produce the finalized matrix as a structured document. Reference: specs/10-permissions-matrix.md, specs/02-requirements.md OQ-003."
+
+requirements:
+  - "None (resolves OQ-003)"
+
+depends_on: []
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Editor conditionals per specs/10-permissions-matrix.md §4.1, §4.2, §4.8 need resolution"
+  - "Memory protection rules per specs/10-permissions-matrix.md §6"
+  - "Plan-based restrictions noted but deferred (specs/10-permissions-matrix.md §8)"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Finalized permission matrix covering all domains: Agents, Identity Files, Content, Calendar, Insights, Experiments, Memory, Prevention Rules, Assets, Settings"
+  - "All conditional (△) permissions resolved with explicit rules"
+  - "Document committed to repo"
+  - "Decision unblocks T-COLLAB-001"
+  - "Finalized matrix document committed"
+  - "All conditional permissions resolved"
+  - "No implementation required — research only"
+
+commit:
+  subject: "feat(core): research spike permission matrix finalization"
+  body:
+    - "Implements T-CORE-012"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,46 @@
+﻿id: T-MEMORY-006
+title: "Prevention Rule Management Service"
+type: feat
+scope: "memory"
+goal: "Implement prevention rule management: create rules from mistakes, activate/deactivate rules, promote effective rules to durable memory. Rules are injected into AI context during generation to prevent repeating mistakes. Reference: specs/08-memory-system.md §7, specs/10-permissions-matrix.md §4.7."
+
+requirements:
+  - "REQ-MEMORY-007"
+
+depends_on:
+  - "T-MEMORY-005"
+  - "T-COLLAB-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Editor can create rules; Creator only can activate/deactivate (specs/10-permissions-matrix.md §4.7)"
+  - "Active rules are part of AI context injection priority #1 (specs/07-ai-contracts.md §9)"
+  - "promoted_to_memory flag tracked"
+  - "Audit logging for all rule state changes"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Create prevention rule from mistake or manually"
+  - "Fields: rule_text, failure_type, confidence_score, is_active, linked mistake_id"
+  - "Activate/deactivate toggle (Creator only)"
+  - "Promote to durable memory (Creator only, via T-MEMORY-004)"
+  - "Active rules injected into AI context (max 500 tokens per specs/08-memory-system.md §10)"
+  - "Rule list per agent"
+  - "Requirement satisfied: REQ-MEMORY-007"
+  - "Type-safe"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(memory): implement prevention rule management service"
+  body:
+    - "Implements T-MEMORY-006"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

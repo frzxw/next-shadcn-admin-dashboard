@@ -1,0 +1,53 @@
+﻿id: T-MEMORY-008
+title: "Memory Dashboard UI"
+type: feat
+scope: "memory"
+goal: "Build the Memory page with Tier 2 tabs: Durable Memory, Daily Logs, Pending Promotions, Error Memory, Decision Log. Display tier filter tabs, confidence badges, promotion action buttons, diff viewer for durable memory, and prevention rule grouping. Reference: specs/01-product-spec.md §5.9, specs/08-memory-system.md §14."
+
+requirements:
+  - "REQ-MEMORY-001"
+  - "REQ-MEMORY-003"
+
+depends_on:
+  - "T-MEMORY-004"
+  - "T-MEMORY-005"
+  - "T-MEMORY-006"
+  - "T-CORE-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Cards group: recent insights, pending promotions, active durable rules (specs/08-memory-system.md §14)"
+  - "Bento layout for memory overview"
+  - "Modals for promotion confirmation (specs/16-design-system-alignment.md §10.2)"
+  - "Memory system safety: no auto-promotion without Creator action"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Durable Memory tab: curated memory items with version history"
+  - "Daily Logs tab: ephemeral memory entries with auto-expire indicators"
+  - "Pending Promotions tab: candidate memories with confidence badges + approve/reject buttons"
+  - "Error Memory tab: mistakes list with failure type filter + recurrence rate"
+  - "Prevention Rules section: active rules with toggle + promote button"
+  - "Diff viewer for durable memory version changes"
+  - "Confidence badges on candidate items"
+  - "Role-gated promotion controls (Creator only)"
+  - "Loading/empty states"
+  - "Requirement satisfied: REQ-MEMORY-001, REQ-MEMORY-003"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+  - "Role-gated controls"
+
+commit:
+  subject: "feat(memory): implement memory dashboard ui"
+  body:
+    - "Implements T-MEMORY-008"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

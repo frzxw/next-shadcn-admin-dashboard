@@ -1,0 +1,45 @@
+﻿id: T-AUDIT-004
+title: "Identity Edit Audit with Diff Hash"
+type: feat
+scope: "audit"
+goal: "Log identity file edits (SOUL, IDENTITY, USER, MEMORY durable) with previous/new version IDs and diff hash metadata."
+
+requirements:
+  - "REQ-AUDIT-002"
+
+depends_on:
+  - "T-AUDIT-001"
+  - "T-AGENT-004"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Hook into identity save transaction"
+  - "Compute diff hash deterministically"
+  - "Ensure ordering with file version creation"
+  - "Works for creator-only and conditional USER edits"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Identity edits create audit events with actor, file_type, previous_version_id, new_version_id, diff_hash"
+  - "Optional structured diff summary stored"
+  - "Audit write failure blocks critical identity mutation"
+  - "History query supports per-agent file change timeline"
+  - "No raw secrets included in metadata"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded for identity mutations"
+
+commit:
+  subject: "feat(audit): implement identity edit audit with diff hash"
+  body:
+    - "Implements T-AUDIT-004"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

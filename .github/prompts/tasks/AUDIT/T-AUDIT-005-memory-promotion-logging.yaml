@@ -1,0 +1,45 @@
+﻿id: T-AUDIT-005
+title: "Memory Action Audit Logging"
+type: feat
+scope: "audit"
+goal: "Implement audit logging for memory lifecycle actions: ephemeral create, candidate create, promotion, rejection, conflict resolution."
+
+requirements:
+  - "REQ-AUDIT-004"
+
+depends_on:
+  - "T-AUDIT-001"
+  - "T-MEMORY-004"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Integrate in memory service layer"
+  - "Avoid duplicate logging for single transaction"
+  - "Use consistent action_type naming conventions"
+  - "Required for compliance and forensic tracing"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Memory events log memory_id, tier_before, tier_after, confidence_score, actor, timestamp"
+  - "Promotion and rejection both audited"
+  - "Conflict resolution actions audited with resolution metadata"
+  - "Failed promotions produce failure audit event"
+  - "Query by memory_id supported"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded for memory actions"
+
+commit:
+  subject: "feat(audit): implement memory action audit logging"
+  body:
+    - "Implements T-AUDIT-005"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

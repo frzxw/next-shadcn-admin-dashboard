@@ -1,0 +1,44 @@
+﻿id: T-NFR-003
+title: "KPI Snapshot Caching Strategy"
+type: feat
+scope: "nfr"
+goal: "Implement cache strategy for read-heavy KPI queries keyed by workspace, agent, and range with short TTL and invalidation hooks."
+
+requirements:
+  - "REQ-NFR-002"
+
+depends_on:
+  - "T-INSIGHT-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Favor server-side cache boundaries"
+  - "Keep cache payload compact"
+  - "Use stale-while-revalidate if supported"
+  - "Ensure cache safety in multi-tenant context"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Cache layer applied to KPI snapshot reads"
+  - "Cache key includes workspace_id, agent_id, range"
+  - "TTL configured for active workspaces"
+  - "Invalidate on new metrics ingestion or memory/identity events where relevant"
+  - "Dashboard response times improve vs uncached baseline"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Performance target support demonstrated"
+
+commit:
+  subject: "feat(nfr): implement kpi snapshot caching strategy"
+  body:
+    - "Implements T-NFR-003"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

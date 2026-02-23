@@ -1,0 +1,41 @@
+﻿id: T-AI-005
+title: "Outline Generation Contract & Schema"
+type: feat
+scope: "ai"
+goal: "Define typed contracts and zod schemas for outline generation."
+
+requirements:
+  - "REQ-AI-002"
+
+depends_on:
+  - "T-AI-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Keep strict structural output schema"
+  - "Include trace typing compatibility"
+  - "Avoid free-form unvalidated output"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Request includes topic, objective, duration_target, audience_level"
+  - "Response includes ordered outline sections with title, description, estimated_seconds"
+  - "Schema validates audience_level enum"
+  - "Contract exported for server action and UI"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(ai): implement outline generation contract schema"
+  body:
+    - "Implements T-AI-005"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,46 @@
+﻿id: T-AI-016
+title: "Weekly Strategic Summary Server Action"
+type: feat
+scope: "ai"
+goal: "Implement server action to generate weekly strategic recommendations from KPI and experiment context."
+
+requirements:
+  - "REQ-AI-007"
+
+depends_on:
+  - "T-AI-015"
+  - "T-AI-001"
+  - "T-AUDIT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use high-capability generation model route"
+  - "Include memory and prevention rule context where relevant"
+  - "Handle provider failures with safe fallback"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Session/permission checks for allowed roles"
+  - "Input assembled from snapshot and experiment services"
+  - "Structured output returned per contract"
+  - "Streaming support optional for longer summaries"
+  - "Audit logged with trace metadata"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(ai): implement weekly strategic summary server action"
+  body:
+    - "Implements T-AI-016"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,48 @@
+﻿id: T-AI-003
+title: "Hook Generation Server Action"
+type: feat
+scope: "ai"
+goal: "Implement server action for hook generation with session validation, permission checks, contract validation, context injection, orchestrator call, and trace return."
+
+requirements:
+  - "REQ-AI-001"
+
+depends_on:
+  - "T-AI-001"
+  - "T-AI-002"
+  - "T-COLLAB-002"
+  - "T-AUDIT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Follow context injection priority: prevention -> durable -> recent -> pillars"
+  - "Keep token budget limits for memory injection"
+  - "Do not expose provider internals in errors"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Action validates user session and role (Creator/Editor)"
+  - "Input validated using hook contract schema"
+  - "Injects identity snapshot + relevant memory + prevention rules"
+  - "Calls orchestrator and returns hooks + trace"
+  - "Errors handled with safe fallback messages"
+  - "AI call audited"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(ai): implement hook generation server action"
+  body:
+    - "Implements T-AI-003"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

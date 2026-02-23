@@ -1,0 +1,46 @@
+﻿id: T-INSIGHT-004
+title: "Hook Score Trend Chart"
+type: feat
+scope: "insight"
+goal: "Build a hook score trend visualization showing hook_score over time for agent's posts. Displays as a line or bar chart with trend line. Highlight posts with notably high or low hook scores. Reference: specs/01-product-spec.md §5.5, specs/04-information-architecture.md §3.5 Row 2."
+
+requirements:
+  - "REQ-INSIGHT-003"
+
+depends_on:
+  - "T-INSIGHT-002"
+  - "T-CONTENT-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Data from post_analysis.hook_score"
+  - "Pre-aggregated server-side"
+  - "4-col card in insights bento (Row 2)"
+  - "Chart rendering < 300ms"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Line/bar chart: hook_score per post over time"
+  - "Trend line overlay"
+  - "Threshold markers for good/poor hook performance"
+  - "Hover tooltips with post title + score"
+  - "Configurable date range"
+  - "Consistent chart styling"
+  - "Requirement satisfied: REQ-INSIGHT-003"
+  - "Type-safe"
+  - "No console errors"
+  - "Chart accessible via table fallback"
+
+commit:
+  subject: "feat(insight): implement hook score trend chart"
+  body:
+    - "Implements T-INSIGHT-004"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

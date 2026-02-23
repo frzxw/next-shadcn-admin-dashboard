@@ -1,0 +1,51 @@
+﻿id: T-AGENT-006
+title: "Agent Overview Bento Dashboard"
+type: feat
+scope: "agent"
+goal: "Build the Agent Overview tab as a bento dashboard. Layout: Row 1 (Agent Header Card — name, status, integrity score), Row 2 (Persona Integrity Trend 6-col + Narrative Alignment Trend 6-col), Row 3 (Visual Consistency 6-col + Voice Consistency 6-col), Row 4 (Mistake Recurrence 4-col + Top Prevention Rules 4-col + Audience Loyalty 4-col). Reference: specs/04-information-architecture.md §3.3."
+
+requirements:
+  - "REQ-AGENT-003"
+  - "REQ-AGENT-004"
+
+depends_on:
+  - "T-AGENT-003"
+  - "T-CORE-007"
+  - "T-NFR-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Server component shell with interactive chart widgets"
+  - "Reuse KPI strip pattern for header card"
+  - "Charts require precomputed series from agent_kpi_snapshots"
+  - "Hover tooltips on all charts"
+  - "\"View Details\" drill-down action on each card"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Agent Overview renders bento grid with 4 rows"
+  - "Agent header card shows name, status, current integrity score"
+  - "Trend chart slots for integrity + alignment (data from T-AGENT-007, T-AGENT-008)"
+  - "Consistency metric slots (data from T-AGENT-009, T-AGENT-010)"
+  - "Mistake + prevention + loyalty summary slots"
+  - "Cards accept loading/error/empty states"
+  - "Responsive: 12-col desktop → stacked mobile"
+  - "Requirement satisfied: REQ-AGENT-003, REQ-AGENT-004"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+  - "Responsive layout verified"
+
+commit:
+  subject: "feat(agent): implement agent overview bento dashboard"
+  body:
+    - "Implements T-AGENT-006"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,45 @@
+﻿id: T-NFR-006
+title: "AI Model/Prompt Versioning Framework"
+type: feat
+scope: "nfr"
+goal: "Implement consistent model and prompt version tracking across AI outputs and persisted scoring records."
+
+requirements:
+  - "REQ-NFR-006"
+
+depends_on:
+  - "T-AI-001"
+  - "T-AUDIT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Define shared version constants per feature"
+  - "Avoid silent prompt behavior changes"
+  - "Hash prompt templates for trace correlation"
+  - "Include version in exported reports where relevant"
+
+validation:
+  - npm run check
+
+done_when:
+  - "AI responses include model_version and prompt_version metadata"
+  - "`post_analysis` stores model_version for scoring outputs"
+  - "Prompt version increments are explicit and traceable"
+  - "Version metadata included in audit entries"
+  - "Historical outputs remain immutable after version changes"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded for AI version metadata"
+
+commit:
+  subject: "feat(nfr): implement ai modelprompt versioning framework"
+  body:
+    - "Implements T-NFR-006"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,45 @@
+﻿id: T-AUDIT-007
+title: "Content Mutation Audit Logging"
+type: feat
+scope: "audit"
+goal: "Implement audit logging for content mutations: draft create, update, schedule, publish, archive, delete (if enabled), and manual metric overrides."
+
+requirements:
+  - "REQ-AUDIT-001"
+
+depends_on:
+  - "T-AUDIT-001"
+  - "T-CONTENT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Integrate in content server actions"
+  - "Ensure workspace and actor identity attached"
+  - "Avoid logging large content bodies; use hashes/summaries where needed"
+  - "Keep action types standardized for analytics"
+
+validation:
+  - npm run check
+
+done_when:
+  - "All content mutation actions create audit entries"
+  - "Publish events include post_id and platform metadata"
+  - "Schedule changes include previous/new scheduled timestamp"
+  - "Archive events include reason where provided"
+  - "Manual overrides explicitly flagged in metadata"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded for content mutations"
+
+commit:
+  subject: "feat(audit): implement content mutation audit logging"
+  body:
+    - "Implements T-AUDIT-007"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

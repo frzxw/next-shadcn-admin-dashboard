@@ -1,0 +1,47 @@
+﻿id: T-CAL-006
+title: "Posting Cadence Health Indicators"
+type: feat
+scope: "cal"
+goal: "Implement posting cadence health indicators: consistency score (actual posts vs recurring slots), overposting alerts, strategic gap detection, and burnout risk. Display as a health card within the Cadence Health tab or as badges in calendar views. Reference: specs/01-product-spec.md §5.4 Cadence Health."
+
+requirements:
+  - "REQ-CAL-004"
+
+depends_on:
+  - "T-CAL-003"
+  - "T-CAL-004"
+  - "T-INSIGHT-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Data computed from content_items (published/scheduled) vs recurring_slots"
+  - "Rollup computation server-side"
+  - "Can leverage agent_kpi_snapshots for historical cadence data"
+  - "Burnout detection heuristic: excessive daily posts over 7-day window"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Posting consistency score: actual_posts / expected_posts_from_slots"
+  - "Overposting detection: alerts when frequency significantly exceeds plan"
+  - "Strategic gap detection: identifies unfilled time periods"
+  - "Health indicators displayed per agent"
+  - "Warning/success colors per threshold"
+  - "Cadence Health tab or card in Calendar section"
+  - "Requirement satisfied: REQ-CAL-004"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(cal): implement posting cadence health indicators"
+  body:
+    - "Implements T-CAL-006"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

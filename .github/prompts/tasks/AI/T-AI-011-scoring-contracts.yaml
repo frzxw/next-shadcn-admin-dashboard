@@ -1,0 +1,44 @@
+﻿id: T-AI-011
+title: "Scoring Contracts (Alignment, Integrity, Audience)"
+type: feat
+scope: "ai"
+goal: "Define zod contracts and types for narrative alignment, persona integrity, and audience quality scoring requests/responses."
+
+requirements:
+  - "REQ-AI-004"
+  - "REQ-AI-005"
+  - "REQ-AI-006"
+
+depends_on:
+  - "T-AI-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Scoring models should use deterministic settings"
+  - "Include model_version in score payload typing"
+  - "Keep contracts versioned and reusable"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Alignment request/response schema implemented"
+  - "Integrity request/response schema implemented"
+  - "Audience quality request/response schema implemented"
+  - "Score ranges validated (0–100)"
+  - "Trace metadata typing shared across all scoring responses"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(ai): implement scoring contracts alignment integrity audience"
+  body:
+    - "Implements T-AI-011"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

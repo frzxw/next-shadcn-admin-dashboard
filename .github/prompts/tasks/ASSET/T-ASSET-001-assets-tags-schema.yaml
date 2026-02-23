@@ -1,0 +1,42 @@
+﻿id: T-ASSET-001
+title: "Assets & Tags Database Schema"
+type: feat
+scope: "asset"
+goal: "Create database tables for the asset management system: `assets` (file_url, file_type, metadata jsonb) and `asset_tags` (tag labeling). Assets are workspace-scoped with optional agent association. Reference: specs/05-data-model.md §9."
+
+requirements:
+  - "REQ-ASSET-001"
+
+depends_on:
+  - "T-CORE-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Assets are workspace-scoped, optionally agent-scoped"
+  - "Metadata stores dimensions, size, original filename, etc."
+  - "File URL points to S3-compatible storage (actual upload in T-ASSET-002)"
+  - "Soft delete handled by status or archive flag"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`assets` table: id, workspace_id, agent_id (nullable), file_url, file_type, metadata (jsonb), created_at"
+  - "`asset_tags` table: id, asset_id, tag"
+  - "Indexes on workspace_id, (asset_id, tag)"
+  - "Migration runs cleanly"
+  - "Requirement satisfied: REQ-ASSET-001"
+  - "Type-safe ORM models"
+  - "Migration idempotent"
+
+commit:
+  subject: "feat(asset): implement assets tags database schema"
+  body:
+    - "Implements T-ASSET-001"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

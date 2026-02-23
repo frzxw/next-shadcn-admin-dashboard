@@ -1,0 +1,51 @@
+﻿id: T-CORE-001
+title: "Database Schema Foundation — Workspaces, Users, Members"
+type: feat
+scope: "core"
+goal: "Set up the ORM (Prisma or Drizzle) with a Postgres database. Create the foundational tables: `workspaces`, `users`, and `workspace_members` as defined in specs/05-data-model.md §3. This establishes workspace-scoped multi-tenancy and role assignment (creator/editor/analyst/viewer). Include migration scripts and seed data for local development. Reference: specs/03-architecture.md §5.1, specs/05-data-model.md §3."
+
+requirements:
+  - "REQ-CORE-002"
+  - "REQ-NFR-008"
+
+depends_on: []
+
+allowed_paths:
+  - src/server/services/db/
+
+constraints:
+  - "ORM client must be a singleton (specs/03-architecture.md §5.1)"
+  - "Use uuid for primary keys"
+  - "Role column uses enum type"
+  - "`plan_tier` supports future monetization gating (specs/17-monetization-model.md)"
+  - "All tables workspace-scoped per data modeling principle (specs/05-data-model.md §1)"
+  - "Server-only module — no client imports"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`workspaces` table created with id, name, plan_tier, created_at, updated_at"
+  - "`users` table created with id, email, name, auth_provider, created_at"
+  - "`workspace_members` table created with workspace_id, user_id, role enum (creator|editor|analyst|viewer), created_at"
+  - "Foreign keys and indexes per specs/05-data-model.md"
+  - "ORM client singleton configured at `src/server/services/db/`"
+  - "Migration runs cleanly on fresh Postgres instance"
+  - "Seed script creates at least one workspace + one creator user"
+  - "REQ-CORE-002 (multi-agent workspace) structurally enabled"
+  - "REQ-NFR-008 (scalability for multiple agents per workspace) structurally supported"
+  - "Requirement satisfied: REQ-CORE-002, REQ-NFR-008"
+  - "Type-safe ORM schema with generated types"
+  - "No console errors"
+  - "Migration idempotent"
+  - "Seed script deterministic"
+
+commit:
+  subject: "feat(core): implement database schema foundation workspaces users members"
+  body:
+    - "Implements T-CORE-001"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,31 @@
+id: T-000
+title: ""
+type: feat
+scope: ""
+goal: ""
+
+depends_on: []
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "No implementation beyond this task"
+  - "No unrelated formatting"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Acceptance criteria satisfied"
+  - "Validation command passes"
+
+commit:
+  subject: "feat(scope): short imperative subject"
+  body:
+    - "Why this change is needed"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,44 @@
+﻿id: T-AUD-003
+title: "Comment Depth Scoring Service"
+type: feat
+scope: "aud"
+goal: "Implement comment depth scoring — an AI-powered analysis of comment quality and depth. Uses the AI comment depth scoring contract to analyze comment arrays and produce a depth score, theme list, and sentiment summary per post. Reference: specs/07-ai-contracts.md §6.5."
+
+requirements:
+  - "REQ-AUD-003"
+
+depends_on:
+  - "T-AUD-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "AI contract input: { comments: [string] } → output: { comment_depth_score, themes, sentiment_summary }"
+  - "Uses lower-latency model (classification task per specs/07-ai-contracts.md §7.1)"
+  - "Audit log for AI call"
+  - "Result feeds into audience_quality_score calculation"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Server action accepts post comments array"
+  - "Calls AI scoring with comment depth contract"
+  - "Returns: comment_depth_score (0–100), themes array, sentiment_summary"
+  - "Score stored in post_analysis or audience metadata"
+  - "Handles empty comments gracefully"
+  - "Requirement satisfied: REQ-AUD-003"
+  - "Type-safe"
+  - "No console errors"
+  - "AI trace logged"
+
+commit:
+  subject: "feat(aud): implement comment depth scoring service"
+  body:
+    - "Implements T-AUD-003"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,44 @@
+﻿id: T-AUD-005
+title: "AI-Looking Complaint Detection"
+type: feat
+scope: "aud"
+goal: "Implement detection of \"AI-looking\" complaint patterns in audience comments. Uses AI classification to identify comments suggesting the audience perceives content/avatar as artificially generated, robotic, or uncanny. Flags these as a specific feedback theme with severity. Reference: specs/01-product-spec.md §5.6 Feedback."
+
+requirements:
+  - "REQ-AUD-005"
+
+depends_on:
+  - "T-AUD-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Extension of comment depth scoring (T-AUD-003) — additional classification pass"
+  - "Keywords/patterns: \"fake\", \"AI\", \"robotic\", \"uncanny\", \"looks generated\", etc."
+  - "AI classification using lower-latency model"
+  - "Audit log for AI call"
+
+validation:
+  - npm run check
+
+done_when:
+  - "AI classification identifies AI-perception complaints in comment arrays"
+  - "Complaint pattern stored as special feedback theme type"
+  - "Severity scoring: isolated incidents vs persistent pattern"
+  - "Triggers alert if pattern crosses threshold (feeds into T-CORE-009 alerting)"
+  - "Linked to post for drill-down"
+  - "Requirement satisfied: REQ-AUD-005"
+  - "Type-safe"
+  - "No console errors"
+  - "AI trace logged"
+
+commit:
+  subject: "feat(aud): implement ai-looking complaint detection"
+  body:
+    - "Implements T-AUD-005"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,49 @@
+﻿id: T-COLLAB-002
+title: "Server Permission Enforcement Middleware"
+type: feat
+scope: "collab"
+goal: "Apply mandatory RBAC checks in server actions and sensitive routes. Enforce Creator-only identity edits and durable memory promotion approval; enforce Editor access for drafts/calendar operations."
+
+requirements:
+  - "REQ-COLLAB-002"
+  - "REQ-COLLAB-003"
+  - "REQ-COLLAB-004"
+
+depends_on:
+  - "T-COLLAB-001"
+  - "T-CORE-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Validate session first, then membership, then policy check"
+  - "Keep checks server-side even if UI hides controls"
+  - "Use zod for action input validation before mutation"
+  - "Audit denied access attempts where applicable"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Permission guard utility used by all mutating server actions"
+  - "Creator-only enforcement for SOUL/IDENTITY/MEMORY durable edits"
+  - "Creator-only enforcement for memory promotion approval"
+  - "Editor access allowed for drafts and calendar mutations"
+  - "Unauthorized requests return safe 403 responses"
+  - "REQ-COLLAB-002, REQ-COLLAB-003, REQ-COLLAB-004 satisfied"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded for sensitive denies if configured"
+
+commit:
+  subject: "feat(collab): implement server permission enforcement middleware"
+  body:
+    - "Implements T-COLLAB-002"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

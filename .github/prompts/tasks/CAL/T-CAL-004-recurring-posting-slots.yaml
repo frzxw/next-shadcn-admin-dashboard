@@ -1,0 +1,46 @@
+﻿id: T-CAL-004
+title: "Recurring Posting Slot Management"
+type: feat
+scope: "cal"
+goal: "Build the UI for managing recurring posting slots per agent. Slots define the regular posting rhythm (e.g., Monday 10am on Instagram). Slots appear as ghost items on the calendar. Users can fill slots with content or leave them as scheduling suggestions. Reference: specs/01-product-spec.md §5.4."
+
+requirements:
+  - "REQ-CAL-003"
+
+depends_on:
+  - "T-CAL-002"
+  - "T-CAL-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "recurring_slots table from T-CAL-001"
+  - "Ghost items are visual only; they become real content_items when filled"
+  - "Zod validation"
+  - "Permission: Creator + Editor"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Recurring slot management panel (within Calendar settings or Cadence tab)"
+  - "Create slot: agent, day_of_week, time, platform"
+  - "Edit/delete existing slots"
+  - "Slots render as ghost/placeholder items on calendar views"
+  - "Slots generate suggested schedule dates when creating new content"
+  - "Active/inactive toggle per slot"
+  - "Requirement satisfied: REQ-CAL-003"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(cal): implement recurring posting slot management"
+  body:
+    - "Implements T-CAL-004"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

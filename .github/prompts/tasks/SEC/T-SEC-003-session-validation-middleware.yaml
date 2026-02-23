@@ -1,0 +1,44 @@
+﻿id: T-SEC-003
+title: "Session Validation Middleware"
+type: feat
+scope: "sec"
+goal: "Implement centralized session validation middleware/utilities for protected routes and server actions."
+
+requirements:
+  - "REQ-NFR-003"
+
+depends_on:
+  - "T-CORE-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Build on Better Auth adapter"
+  - "Keep route guards lightweight; rely on server action checks for final enforcement"
+  - "No client-side trust assumptions"
+  - "Reuse across all domain modules"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Protected route helper validates active session and membership"
+  - "Missing/invalid sessions redirect or return unauthorized safely"
+  - "Server actions require validated session context"
+  - "Workspace scoping enforced from session identity"
+  - "Security failures logged without sensitive details"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side enforcement present"
+
+commit:
+  subject: "feat(sec): implement session validation middleware"
+  body:
+    - "Implements T-SEC-003"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

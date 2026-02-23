@@ -1,0 +1,42 @@
+﻿id: T-AI-002
+title: "Hook Generation Contract & Schema"
+type: feat
+scope: "ai"
+goal: "Define typed request/response contracts and zod schemas for hook generation."
+
+requirements:
+  - "REQ-AI-001"
+
+depends_on:
+  - "T-AI-001"
+
+allowed_paths:
+  - src\lib\ai/
+
+constraints:
+  - "Keep schemas in `src/lib/ai/contracts.ts`"
+  - "Include prompt/model version fields in trace typing"
+  - "Avoid unstructured outputs"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Request schema includes content_brief, objective, platform, tone_preference(optional)"
+  - "Response schema includes hooks array with text, curiosity_score, clarity_score"
+  - "Enforce min 3 max 7 hooks"
+  - "Hook length validation respects platform limits"
+  - "Contract exported for server action and UI use"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(ai): implement hook generation contract schema"
+  body:
+    - "Implements T-AI-002"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

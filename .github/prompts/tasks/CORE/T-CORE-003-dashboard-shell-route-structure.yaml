@@ -1,0 +1,49 @@
+﻿id: T-CORE-003
+title: "Creator Dashboard Shell & Route Structure"
+type: feat
+scope: "core"
+goal: "Create the creator workspace route group at `src/app/(main)/dashboard/creator/` with sub-routes for all Tier 1 navigation domains: home, agents, content, calendar, insights, audience, assets, experiments, memory, settings. Each route gets a placeholder `page.tsx`. Create a shared layout with sidebar slot. Reference: specs/03-architecture.md §3.1, specs/04-information-architecture.md §2."
+
+requirements:
+  - "REQ-CORE-002"
+  - "REQ-NFR-004"
+
+depends_on:
+  - "T-CORE-002"
+
+allowed_paths:
+  - src/app/(main)/dashboard/
+  - src/app/(main)/dashboard/creator/
+
+constraints:
+  - "Use server components for layout shell"
+  - "Sidebar component integrated via layout (implemented in T-CORE-004)"
+  - "Each domain route is a separate directory under `creator/`"
+  - "Home route uses `(home)/page.tsx` pattern"
+  - "Preserve existing `src/app/(main)/dashboard/` routes"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Route group `src/app/(main)/dashboard/creator/` created"
+  - "All 10 domain routes created with placeholder pages"
+  - "Shared layout.tsx with sidebar integration point"
+  - "Feature-local `_components/` directories created per domain"
+  - "Route group follows colocated module pattern (REQ-NFR-004)"
+  - "Pages render without error"
+  - "Requirement satisfied: REQ-CORE-002, REQ-NFR-004"
+  - "Type-safe"
+  - "No console errors"
+  - "All routes accessible via browser"
+  - "Colocated structure matches specs/03-architecture.md §3.1"
+
+commit:
+  subject: "feat(core): implement creator dashboard shell route structure"
+  body:
+    - "Implements T-CORE-003"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

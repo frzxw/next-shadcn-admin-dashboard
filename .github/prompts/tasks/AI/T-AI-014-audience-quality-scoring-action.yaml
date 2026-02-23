@@ -1,0 +1,45 @@
+﻿id: T-AI-014
+title: "Audience Quality Scoring Action"
+type: feat
+scope: "ai"
+goal: "Implement audience quality scoring action using engagement-depth inputs and configurable weighting profile."
+
+requirements:
+  - "REQ-AI-006"
+
+depends_on:
+  - "T-AI-011"
+  - "T-AUD-003"
+  - "T-AUDIT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use sigmoid-normalized scoring output"
+  - "Handle missing metrics with graceful fallbacks"
+  - "Keep weights configurable by version profile"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Computes audience_quality score (0–100)"
+  - "Inputs include returning viewer %, saves/shares per 1k, comment depth, conversion"
+  - "Weight profile version captured"
+  - "Result persisted to post_analysis"
+  - "Audit logged with trace"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(ai): implement audience quality scoring action"
+  body:
+    - "Implements T-AI-014"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

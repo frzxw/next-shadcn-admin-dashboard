@@ -1,0 +1,43 @@
+﻿id: T-AI-019
+title: "Visual Drift Detection Integration Shell (Phase 2)"
+type: feat
+scope: "ai"
+goal: "Implement Phase 2 integration shell for visual drift detection workflow, including interfaces for embedding extraction, scoring, and drift event creation without blocking publish flow."
+
+requirements:
+  - "REQ-AI-009"
+
+depends_on:
+  - "T-AGENT-009"
+  - "T-ASSET-005"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Full model implementation deferred to Phase 2"
+  - "Keep async architecture with queue integration points"
+  - "Severity mapping aligned to alert system thresholds"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Visual drift service interfaces defined"
+  - "Drift event creation path integrated with mistakes/alerts pipeline"
+  - "Publishing flow remains non-blocking when visual scoring pending"
+  - "Placeholder/background job hooks for embedding extraction"
+  - "Trace and model version fields available for future scoring output"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(ai): implement visual drift detection integration shell phase 2"
+  body:
+    - "Implements T-AI-019"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,46 @@
+﻿id: T-INSIGHT-007
+title: "Longevity Curve Chart"
+type: feat
+scope: "insight"
+goal: "Build a longevity curve chart showing the tail performance of content over 7/14/30 day windows. Displays how views accumulate post-publish, indicating evergreen vs flash-in-the-pan content. Supports comparison between posts. Reference: specs/06-kpi-definitions.md §3.4 (Longevity Index)."
+
+requirements:
+  - "REQ-INSIGHT-006"
+
+depends_on:
+  - "T-INSIGHT-002"
+  - "T-CONTENT-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Data from post_metrics time-series snapshots"
+  - "Longevity Index normalized to 0–100 (specs/06-kpi-definitions.md §3.4)"
+  - "6-col card in insights bento"
+  - "Pre-aggregated server-side"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Line chart showing cumulative views at 7d, 14d, 30d post-publish"
+  - "Multi-post overlay for comparison"
+  - "Longevity index score displayed (views_after_30d / views_first_7d)"
+  - "Suppress for posts < 30 days old"
+  - "Hover tooltips"
+  - "Date range filtering"
+  - "Requirement satisfied: REQ-INSIGHT-006"
+  - "Type-safe"
+  - "No console errors"
+  - "Chart accessible via table fallback"
+
+commit:
+  subject: "feat(insight): implement longevity curve chart"
+  body:
+    - "Implements T-INSIGHT-007"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

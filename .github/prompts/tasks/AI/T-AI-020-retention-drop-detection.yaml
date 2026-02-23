@@ -1,0 +1,45 @@
+﻿id: T-AI-020
+title: "Structural Retention Drop Cause Detection"
+type: feat
+scope: "ai"
+goal: "Implement AI-assisted detection and annotation of structural retention drop causes from retention curves and post structure signals."
+
+requirements:
+  - "REQ-AI-010"
+
+depends_on:
+  - "T-CONTENT-002"
+  - "T-AI-011"
+  - "T-AUDIT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use fallback when full retention curve unavailable"
+  - "Keep output structured and bounded for UI rendering"
+  - "Integrate with alert thresholds for retention collapse"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Detects significant drop points and generates cause annotations"
+  - "Stores annotations in `post_analysis.retention_drop_annotations`"
+  - "Supports drill-down consumption in post analysis UI"
+  - "Emits mistake/prevention candidate signals for repeated patterns"
+  - "Audit logged for scoring runs"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(ai): implement structural retention drop cause detection"
+  body:
+    - "Implements T-AI-020"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

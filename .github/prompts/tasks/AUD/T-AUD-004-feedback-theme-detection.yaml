@@ -1,0 +1,44 @@
+﻿id: T-AUD-004
+title: "Feedback Theme Detection Service"
+type: feat
+scope: "aud"
+goal: "Build a service that detects repeated audience feedback themes across an agent's posts. Clusters comment themes, tracks occurrence counts, and surfaces trending positive or negative feedback patterns. Reference: specs/01-product-spec.md §5.6 Feedback."
+
+requirements:
+  - "REQ-AUD-004"
+
+depends_on:
+  - "T-AUD-001"
+  - "T-AUD-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Leverages AI comment analysis output themes array"
+  - "Clustering may use simple frequency + similarity (MVP) or AI clustering"
+  - "Updated on new comment analysis runs"
+  - "Agent-scoped"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Feedback themes identified from comment depth analysis output"
+  - "Themes stored in audience_feedback_clusters with occurrence counts and sentiment"
+  - "Recurring themes highlighted (occurrence > threshold)"
+  - "Trend detection: new vs growing vs declining themes"
+  - "Data feeds into audience dashboard (T-AUD-006)"
+  - "Requirement satisfied: REQ-AUD-004"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(aud): implement feedback theme detection service"
+  body:
+    - "Implements T-AUD-004"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

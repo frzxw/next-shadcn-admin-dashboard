@@ -1,0 +1,48 @@
+﻿id: T-AI-001
+title: "AI Orchestrator & Provider Adapter Boundary"
+type: feat
+scope: "ai"
+goal: "Implement AI orchestration boundary with provider interface, provider implementations, routing policy, request normalization, response normalization, and trace metadata."
+
+requirements:
+  - "REQ-AI-001"
+  - "REQ-AI-002"
+  - "REQ-AI-003"
+
+depends_on:
+  - "T-CORE-010"
+  - "T-CORE-002"
+
+allowed_paths:
+  - src\server\services\ai/
+
+constraints:
+  - "No direct client-to-provider calls"
+  - "Include prompt hash, model, provider, latency, actor in trace"
+  - "Route by feature category (generation/scoring/classification)"
+  - "Zod validation at action boundary"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Provider interface defined at `src/server/services/ai/provider.ts`"
+  - "Orchestrator implemented at `src/server/services/ai/aiOrchestrator.ts`"
+  - "Requests pass only via server action -> orchestrator -> provider"
+  - "Unified response includes output + trace metadata"
+  - "Failure responses standardized"
+  - "Memory/context injection hooks available"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit logging integration ready"
+
+commit:
+  subject: "feat(ai): implement ai orchestrator provider adapter boundary"
+  body:
+    - "Implements T-AI-001"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

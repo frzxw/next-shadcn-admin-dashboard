@@ -1,0 +1,44 @@
+﻿id: T-AI-012
+title: "Narrative Alignment Scoring Action"
+type: feat
+scope: "ai"
+goal: "Implement server action/service for narrative alignment scoring using pillar context and prohibited topic checks."
+
+requirements:
+  - "REQ-AI-004"
+
+depends_on:
+  - "T-AI-011"
+  - "T-AUDIT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use pillar data from agent configuration"
+  - "Enforce score bounds and integer rounding for display"
+  - "Keep deterministic scoring params"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Scores post text against pillar context and prohibited topics"
+  - "Returns alignment_score, matched_pillar, drift_detected, explanation"
+  - "Score persisted to post_analysis with model_version"
+  - "Consecutive low-score drift signals emitted for alerting"
+  - "Audit logged with trace metadata"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(ai): implement narrative alignment scoring action"
+  body:
+    - "Implements T-AI-012"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

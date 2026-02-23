@@ -1,0 +1,47 @@
+﻿id: T-EXP-006
+title: "Promote Experiment Learning to Memory"
+type: feat
+scope: "exp"
+goal: "Implement the workflow to promote experiment learnings to the memory queue. When an experiment completes with high confidence, create a candidate memory item and/or prevention rule from the result. Requires Creator approval for promotion to durable memory. Reference: specs/09-experimentation-framework.md §7, specs/08-memory-system.md §5.2."
+
+requirements:
+  - "REQ-EXP-005"
+
+depends_on:
+  - "T-EXP-002"
+  - "T-MEMORY-004"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Integration point between EXP and MEMORY systems"
+  - "Memory item source_type = 'experiment'"
+  - "Links experiment_id to memory_item"
+  - "Feeds into T-MEMORY-004 (promotion workflow)"
+  - "Confidence threshold from specs/09-experimentation-framework.md §7"
+
+validation:
+  - npm run check
+
+done_when:
+  - "\"Promote to Memory\" action on completed experiments with high confidence"
+  - "Creates candidate memory item with experiment summary and confidence score"
+  - "Optionally creates prevention_rule or reinforcement rule"
+  - "Notifies Creator for review"
+  - "Permission: Creator only for promotion approval"
+  - "Audit log for promotion action"
+  - "Requirement satisfied: REQ-EXP-005"
+  - "Type-safe"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(exp): implement promote experiment learning to memory"
+  body:
+    - "Implements T-EXP-006"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

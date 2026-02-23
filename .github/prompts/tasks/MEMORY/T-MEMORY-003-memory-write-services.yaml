@@ -1,0 +1,47 @@
+﻿id: T-MEMORY-003
+title: "Ephemeral & Candidate Memory Write Services"
+type: feat
+scope: "memory"
+goal: "Implement services for creating ephemeral and candidate memory items. Ephemeral memory auto-created by system events (KPI anomalies, experiment completion, AI summaries). Candidate memory created by repeated signals or explicit user action. Both write to DB and optionally mirror to Supermemory. Reference: specs/08-memory-system.md §5.1, §5.2."
+
+requirements:
+  - "REQ-MEMORY-002"
+
+depends_on:
+  - "T-MEMORY-001"
+  - "T-MEMORY-002"
+  - "T-AUDIT-005"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Ephemeral triggered by: KPI anomaly, experiment completion, AI summary"
+  - "Candidate triggered by: repeated signal, experiment confidence, recurring failure"
+  - "Auto-expire implemented via scheduled cleanup or soft TTL"
+  - "Audit log for all memory writes (specs/08-memory-system.md §12)"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`createEphemeralMemory` service: creates tier=ephemeral item, logs audit"
+  - "`createCandidateMemory` service: creates tier=candidate with confidence_score, logs audit"
+  - "Auto-expiration logic for ephemeral (configurable window, e.g., 30 days)"
+  - "Candidate expiration for unreviewed items (e.g., 60 days)"
+  - "Mirrors to Supermemory with appropriate tags"
+  - "Permission: system-generated (ephemeral), Creator+Editor (manual candidate)"
+  - "Requirement satisfied: REQ-MEMORY-002"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(memory): implement ephemeral candidate memory write services"
+  body:
+    - "Implements T-MEMORY-003"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

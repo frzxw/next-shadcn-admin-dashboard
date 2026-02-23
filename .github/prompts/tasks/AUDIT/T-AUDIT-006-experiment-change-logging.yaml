@@ -1,0 +1,45 @@
+﻿id: T-AUDIT-006
+title: "Experiment Change Audit Logging"
+type: feat
+scope: "audit"
+goal: "Log experiment lifecycle and mutation events: create, activate, complete, archive, variant updates, and learning promotions."
+
+requirements:
+  - "REQ-AUDIT-003"
+
+depends_on:
+  - "T-AUDIT-001"
+  - "T-EXP-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Hook in experiment server actions"
+  - "Keep metadata compact and typed"
+  - "Support filtering by entity_type=experiment"
+  - "Ensure no silent state transitions"
+
+validation:
+  - npm run check
+
+done_when:
+  - "All experiment mutations create audit entries"
+  - "Variant-level changes include experiment_id and variant_id metadata"
+  - "Completion logs confidence_score and winning_variant_id"
+  - "Archive reason captured"
+  - "Promotion-to-memory link captured when applicable"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded for experiment changes"
+
+commit:
+  subject: "feat(audit): implement experiment change audit logging"
+  body:
+    - "Implements T-AUDIT-006"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

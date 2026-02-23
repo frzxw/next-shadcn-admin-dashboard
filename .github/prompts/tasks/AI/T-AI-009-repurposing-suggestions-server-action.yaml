@@ -1,0 +1,48 @@
+﻿id: T-AI-009
+title: "Repurposing Suggestions Server Action"
+type: feat
+scope: "ai"
+goal: "Implement server action for cross-format repurposing suggestions with permission checks and audited AI trace."
+
+requirements:
+  - "REQ-AI-003"
+
+depends_on:
+  - "T-AI-001"
+  - "T-AI-008"
+  - "T-COLLAB-002"
+  - "T-AUDIT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Keep provider routing in orchestrator"
+  - "Avoid exposing sensitive context to client"
+  - "Apply token budget for context injection"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Session and role validation (Creator/Editor)"
+  - "Request validation with repurposing schema"
+  - "Context injection includes identity and prevention rules"
+  - "Returns ranked suggestions + trace metadata"
+  - "Safe error fallback and retry support"
+  - "Audit event logged for call"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(ai): implement repurposing suggestions server action"
+  body:
+    - "Implements T-AI-009"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,45 @@
+﻿id: T-ASSET-007
+title: "Asset-Post Performance Linking"
+type: feat
+scope: "asset"
+goal: "Implement linking between assets and posts to correlate asset usage with post performance. Track which assets were used in which posts and surface performance data on asset detail views. Reference: specs/01-product-spec.md §5.7."
+
+requirements:
+  - "REQ-ASSET-005"
+
+depends_on:
+  - "T-ASSET-001"
+  - "T-CONTENT-001"
+  - "T-CONTENT-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Many-to-many relation between posts and assets"
+  - "Performance data sourced from post_metrics"
+  - "Feeds into visual consistency analysis (which assets performed best)"
+  - "Server action for linking/unlinking"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`post_assets` junction table: post_id, asset_id"
+  - "Assets can be linked to posts via content editing or post publishing"
+  - "Asset detail view shows linked posts with performance metrics"
+  - "Performance summary: avg engagement, best performing post using this asset"
+  - "API to query assets by performance"
+  - "Requirement satisfied: REQ-ASSET-005"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(asset): implement asset-post performance linking"
+  body:
+    - "Implements T-ASSET-007"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

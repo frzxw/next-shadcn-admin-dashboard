@@ -1,0 +1,48 @@
+﻿id: T-CONTENT-007
+title: "Multi-Part Series Grouping"
+type: feat
+scope: "content"
+goal: "Implement multi-part series grouping for content items. Allow creators to group related content into series (arcs, frameworks, sequential topics). Series have a name, description, ordering, and completion tracking. Calendar integration point for scheduling series sequentially. Reference: specs/01-product-spec.md §5.3 Series."
+
+requirements:
+  - "REQ-CONTENT-006"
+
+depends_on:
+  - "T-CONTENT-001"
+  - "T-CONTENT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Order_index allows drag-and-drop reordering"
+  - "Completion = published items / total items in series"
+  - "Creator + Editor can manage series"
+  - "Zod validation on inputs"
+  - "Audit logging for series mutations"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`content_series` table: id, agent_id, name, description, created_at"
+  - "`content_series_items` junction: series_id, content_item_id, order_index"
+  - "CRUD server actions for series management"
+  - "Series UI: create series, add/reorder items, track completion percentage"
+  - "Series visible in content library as grouping"
+  - "Calendar integration: series items schedulable as a batch"
+  - "Requirement satisfied: REQ-CONTENT-006"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(content): implement multi-part series grouping"
+  body:
+    - "Implements T-CONTENT-007"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

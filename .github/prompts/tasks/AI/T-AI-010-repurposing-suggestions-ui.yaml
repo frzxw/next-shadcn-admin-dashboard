@@ -1,0 +1,43 @@
+﻿id: T-AI-010
+title: "Repurposing Suggestions UI Integration"
+type: feat
+scope: "ai"
+goal: "Add repurposing suggestions panel in drafts/content analysis with apply/edit actions for selected suggestion."
+
+requirements:
+  - "REQ-AI-003"
+
+depends_on:
+  - "T-AI-009"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use slide-over panel for analysis-heavy interactions"
+  - "Keep UI role-gated"
+  - "Persist chosen suggestion via content actions"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Suggestions panel displays ranked options"
+  - "Each suggestion shows target format/platform and rationale"
+  - "Apply suggestion action updates draft content plan"
+  - "Regenerate option available"
+  - "Loading/error/empty states present"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(ai): implement repurposing suggestions ui integration"
+  body:
+    - "Implements T-AI-010"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,46 @@
+﻿id: T-ASSET-005
+title: "Reference Image Set Management"
+type: feat
+scope: "asset"
+goal: "Build reference image set management per agent. Allows defining sets of approved face images, poses, and lighting examples used as baselines for visual consistency. Sets are associated with an agent and used by the visual consistency engine and AI generation pipeline. Reference: specs/12-visual-consistency-engine.md §10, specs/01-product-spec.md §5.7."
+
+requirements:
+  - "REQ-ASSET-003"
+
+depends_on:
+  - "T-ASSET-002"
+  - "T-AGENT-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Reference sets stored as relations: agent_id + asset_id + set_type"
+  - "May need `agent_reference_images` table"
+  - "Visual consistency engine reads these for baseline (Phase 2 computation)"
+  - "Audit log for reference set changes"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Create reference image set per agent"
+  - "Set categories: face, pose, lighting"
+  - "Upload and select images into sets from asset library"
+  - "View current reference sets on agent detail"
+  - "Permission: Creator only"
+  - "Sets used as baseline for visual consistency scoring (T-AGENT-009)"
+  - "Requirement satisfied: REQ-ASSET-003"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+
+commit:
+  subject: "feat(asset): implement reference image set management"
+  body:
+    - "Implements T-ASSET-005"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

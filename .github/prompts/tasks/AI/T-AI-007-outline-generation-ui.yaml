@@ -1,0 +1,43 @@
+﻿id: T-AI-007
+title: "Outline Generation UI Integration"
+type: feat
+scope: "ai"
+goal: "Integrate outline generation in the draft editor with generate/regenerate/apply actions and section-level editing."
+
+requirements:
+  - "REQ-AI-002"
+
+depends_on:
+  - "T-AI-006"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use shared form/list components"
+  - "Keep section editing client-side and persist via content actions"
+  - "Avoid blocking page interactions during generation"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Generate outline button available in draft flow"
+  - "Output rendered as editable ordered sections"
+  - "Regenerate and apply-to-draft actions available"
+  - "Loading/error states implemented"
+  - "Role-gated visibility enforced"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(ai): implement outline generation ui integration"
+  body:
+    - "Implements T-AI-007"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

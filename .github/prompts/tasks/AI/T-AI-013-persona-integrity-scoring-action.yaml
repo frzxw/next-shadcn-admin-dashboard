@@ -1,0 +1,44 @@
+﻿id: T-AI-013
+title: "Persona Integrity Scoring Action"
+type: feat
+scope: "ai"
+goal: "Implement text-based persona integrity scoring action with component outputs (voice_similarity, stance_consistency, style_consistency)."
+
+requirements:
+  - "REQ-AI-005"
+
+depends_on:
+  - "T-AI-011"
+  - "T-AUDIT-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use identity snapshot from agent files"
+  - "Maintain deterministic scoring settings"
+  - "Store sub-scores in metadata for agent dashboards"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Action returns integrity_score and component sub-scores"
+  - "Boundary/violation penalty handling applied"
+  - "Score persisted to post_analysis with model_version"
+  - "Integrity drop signals emitted for alerting and mistakes loop"
+  - "Audit logged"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(ai): implement persona integrity scoring action"
+  body:
+    - "Implements T-AI-013"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

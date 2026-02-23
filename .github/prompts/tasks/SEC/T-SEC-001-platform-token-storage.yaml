@@ -1,0 +1,47 @@
+﻿id: T-SEC-001
+title: "Secure Platform Token Storage"
+type: feat
+scope: "sec"
+goal: "Implement secure storage for external platform tokens/credentials with encryption-at-rest and restricted server-side access patterns."
+
+requirements:
+  - "REQ-NFR-009"
+
+depends_on:
+  - "T-CORE-001"
+  - "T-CORE-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use environment-managed encryption key"
+  - "Avoid logging token material"
+  - "Restrict read methods to integration services only"
+  - "Workspace-scoped token ownership"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Token storage abstraction created in server service layer"
+  - "Tokens encrypted before persistence"
+  - "Decryption only allowed in server runtime"
+  - "Token values never returned to client"
+  - "Rotation/update flow supported"
+  - "Access attempts audited"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded for token changes"
+
+commit:
+  subject: "feat(sec): implement secure platform token storage"
+  body:
+    - "Implements T-SEC-001"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

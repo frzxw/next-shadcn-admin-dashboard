@@ -1,0 +1,48 @@
+﻿id: T-COLLAB-003
+title: "Role-Gated UI Components"
+type: feat
+scope: "collab"
+goal: "Create reusable role-gating UI wrappers and action guards to hide/disable unauthorized controls while preserving server-side enforcement. Include read-only insights mode for Viewer."
+
+requirements:
+  - "REQ-COLLAB-001"
+  - "REQ-COLLAB-003"
+  - "REQ-COLLAB-005"
+
+depends_on:
+  - "T-COLLAB-001"
+  - "T-CORE-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "UI gating is UX only; never replaces server checks"
+  - "Use existing shared UI primitives (button, tooltip, alert)"
+  - "Keep role context sourced from server session/membership"
+  - "No custom design tokens"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Reusable `RoleGate` component created"
+  - "Unauthorized actions hidden or disabled with explanatory tooltip"
+  - "Viewer gets read-only insights access"
+  - "Editor sees content/calendar controls only where permitted"
+  - "Creator-only controls rendered correctly for identity/memory approvals"
+  - "REQ-COLLAB-005 satisfied"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(collab): implement role-gated ui components"
+  body:
+    - "Implements T-COLLAB-003"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,47 @@
+﻿id: T-INSIGHT-008
+title: "Export Insight Reports"
+type: feat
+scope: "insight"
+goal: "Implement export functionality for insight reports. Allow users to export KPI data, chart data, and summary reports as CSV or PDF. Export button as Tier 3 contextual tool in the Insights page header. Reference: specs/02-requirements.md REQ-INSIGHT-007, specs/04-information-architecture.md §3 (Tier 3 tools)."
+
+requirements:
+  - "REQ-INSIGHT-007"
+
+depends_on:
+  - "T-INSIGHT-002"
+  - "T-INSIGHT-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Server action generates export data"
+  - "CSV generation server-side for large datasets"
+  - "PDF generation optional (can use client-side lib or server-side)"
+  - "Rate-limit exports to prevent abuse"
+  - "Audit log for export actions"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Export button in Insights page toolbar"
+  - "CSV export: KPI snapshots for selected date range + agent"
+  - "PDF export: summary report with key metrics and mini-charts (optional for MVP)"
+  - "Export respects current filters (agent, date range)"
+  - "Download triggered client-side"
+  - "Permission: Creator + Editor + Analyst (all except Viewer)"
+  - "Requirement satisfied: REQ-INSIGHT-007"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+
+commit:
+  subject: "feat(insight): implement export insight reports"
+  body:
+    - "Implements T-INSIGHT-008"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

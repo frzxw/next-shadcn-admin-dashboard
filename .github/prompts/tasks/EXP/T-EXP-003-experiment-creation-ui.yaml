@@ -1,0 +1,51 @@
+﻿id: T-EXP-003
+title: "Experiment Creation & Management UI"
+type: feat
+scope: "exp"
+goal: "Build the Experiments page with Tier 2 tabs: A/B Tests, Hypotheses, Results, Learnings. Create experiment creation flow with hypothesis form, variant setup, metric selection, and lifecycle management controls. Reference: specs/09-experimentation-framework.md §9, specs/01-product-spec.md §5.8."
+
+requirements:
+  - "REQ-EXP-001"
+  - "REQ-EXP-002"
+
+depends_on:
+  - "T-EXP-002"
+  - "T-CORE-003"
+  - "T-COLLAB-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Bento layout per specs/09-experimentation-framework.md §9"
+  - "Row 1: Active count, completed this month, high confidence wins"
+  - "Row 2: Active experiment cards"
+  - "Row 3: Completed experiment archive"
+  - "Tabs max 6, URL-persisted"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Experiment list showing active/completed/archived"
+  - "Create experiment flow: hypothesis, primary metric, agent, variants"
+  - "Active experiment cards with: hypothesis, variant comparison, confidence badge, metric delta"
+  - "Activate/Complete/Archive buttons role-gated"
+  - "Variant comparison chart"
+  - "Promote to Memory CTA (links to T-EXP-006)"
+  - "Loading/empty states"
+  - "Requirement satisfied: REQ-EXP-001, REQ-EXP-002"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+  - "Role-gated controls"
+
+commit:
+  subject: "feat(exp): implement experiment creation management ui"
+  body:
+    - "Implements T-EXP-003"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,45 @@
+﻿id: T-NFR-001
+title: "Responsive Layout System Compliance"
+type: feat
+scope: "nfr"
+goal: "Implement and verify responsive layout behavior across desktop/tablet/mobile with required grid adaptations and navigation transitions."
+
+requirements:
+  - "REQ-NFR-001"
+
+depends_on:
+  - "T-CORE-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Follow IA and design governance specs for responsive behavior"
+  - "Prefer shared layout primitives over one-off CSS"
+  - "Validate key routes: Home, Agents, Content, Calendar, Insights"
+  - "Keep interactions keyboard accessible on all breakpoints"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Desktop uses 12-column layout"
+  - "Tablet uses 8-column layout"
+  - "Mobile uses 4-column stacked layout"
+  - "Sidebar collapses appropriately by breakpoint"
+  - "KPI strips/charts adapt to mobile fallback variants"
+  - "No horizontal overflow in major pages"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(nfr): implement responsive layout system compliance"
+  body:
+    - "Implements T-NFR-001"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,44 @@
+﻿id: T-CAL-001
+title: "Calendar Scheduling Schema Extensions"
+type: feat
+scope: "cal"
+goal: "Extend the content data model with calendar-specific tables: `campaigns` (themed groupings), `recurring_slots` (repeating schedule templates). The content_items table already has scheduled_at and campaign_id from T-CONTENT-001. Reference: specs/05-data-model.md §6.1, specs/01-product-spec.md §5.4."
+
+requirements:
+  - "REQ-CAL-001"
+  - "REQ-CAL-003"
+  - "REQ-CAL-005"
+
+depends_on:
+  - "T-CONTENT-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Campaigns are workspace-scoped, not agent-scoped"
+  - "Recurring slots are agent-scoped"
+  - "Slots define posting rhythm for cadence health indicators"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`campaigns` table: id, workspace_id, name, description, start_date, end_date, created_at"
+  - "`recurring_slots` table: id, agent_id, day_of_week, time, platform, is_active, created_at"
+  - "campaign_id FK on content_items references campaigns"
+  - "Migration runs cleanly"
+  - "Indexes on workspace_id for campaigns"
+  - "Requirement satisfied: REQ-CAL-001, REQ-CAL-003, REQ-CAL-005"
+  - "Type-safe ORM models"
+  - "Migration idempotent"
+
+commit:
+  subject: "feat(cal): implement calendar scheduling schema extensions"
+  body:
+    - "Implements T-CAL-001"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

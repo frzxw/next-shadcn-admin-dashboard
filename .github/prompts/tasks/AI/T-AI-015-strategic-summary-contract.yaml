@@ -1,0 +1,41 @@
+﻿id: T-AI-015
+title: "Strategic Summary Contract & Schema"
+type: feat
+scope: "ai"
+goal: "Define contract/schema for weekly strategic copilot recommendations."
+
+requirements:
+  - "REQ-AI-007"
+
+depends_on:
+  - "T-AI-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Keep response bounded and structured"
+  - "Avoid free-form unvalidated payloads"
+  - "Version prompt template explicitly"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Request schema includes KPI snapshot, recent posts summary, active experiments"
+  - "Response schema includes double_down, stop_doing, experiment_next, risk_alerts arrays"
+  - "Schema exported for action and UI"
+  - "Trace metadata typed"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(ai): implement strategic summary contract schema"
+  body:
+    - "Implements T-AI-015"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

@@ -1,0 +1,44 @@
+﻿id: T-AI-017
+title: "Strategic Copilot Panel UI"
+type: feat
+scope: "ai"
+goal: "Build Home dashboard strategic copilot panel rendering weekly recommendations with action-oriented sections."
+
+requirements:
+  - "REQ-AI-007"
+
+depends_on:
+  - "T-AI-016"
+  - "T-CORE-006"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use bento card pattern"
+  - "Keep dense but readable layout"
+  - "Avoid modal-heavy interactions; use inline or slide-over details"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Panel displays double_down, stop_doing, experiment_next, risk_alerts"
+  - "Includes refresh/regenerate control"
+  - "Shows loading and fallback states"
+  - "Recommendation items link to relevant module views"
+  - "Role-gated visibility consistent with permissions"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(ai): implement strategic copilot panel ui"
+  body:
+    - "Implements T-AI-017"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

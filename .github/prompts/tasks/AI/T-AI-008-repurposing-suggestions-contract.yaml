@@ -1,0 +1,41 @@
+﻿id: T-AI-008
+title: "Repurposing Suggestions Contract"
+type: feat
+scope: "ai"
+goal: "Define contracts/schemas for AI repurposing suggestions across formats/platforms."
+
+requirements:
+  - "REQ-AI-003"
+
+depends_on:
+  - "T-AI-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Keep output deterministic with explicit fields"
+  - "Include trace metadata typing"
+  - "Validate target platform enum values"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Request schema includes source content, target platforms/formats, objective"
+  - "Response schema includes ranked suggestions with rationale"
+  - "Output structure validated and typed"
+  - "Contract reused by action and UI"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(ai): implement repurposing suggestions contract"
+  body:
+    - "Implements T-AI-008"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

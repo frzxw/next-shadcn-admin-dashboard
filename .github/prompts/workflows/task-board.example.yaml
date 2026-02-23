@@ -1,0 +1,41 @@
+integration_branch: split/example-initiative
+
+workers:
+  - id: A
+    branch: agent/a
+    allowed_paths:
+      - src/app/
+      - src/navigation/
+  - id: B
+    branch: agent/b
+    allowed_paths:
+      - src/components/
+      - src/lib/
+
+tasks:
+  - id: T-100
+    title: "Add route shell placeholder"
+    type: chore
+    scope: app
+    goal: "Create route placeholders for a new dashboard subsection"
+    depends_on: []
+    allowed_paths:
+      - src/app/
+    validation:
+      - npm run check
+    commit:
+      subject: "chore(app): add dashboard subsection placeholders"
+
+  - id: T-101
+    title: "Extract UI helper"
+    type: refactor
+    scope: components
+    goal: "Extract repeated formatting helper into shared utility"
+    depends_on: []
+    allowed_paths:
+      - src/components/
+      - src/lib/
+    validation:
+      - npm run check
+    commit:
+      subject: "refactor(components): extract shared formatting helper"

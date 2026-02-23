@@ -1,0 +1,44 @@
+﻿id: T-NFR-004
+title: "Server Component Rendering Optimization"
+type: feat
+scope: "nfr"
+goal: "Optimize dashboard shells to use server components by default and hydrate only interactive widgets."
+
+requirements:
+  - "REQ-NFR-002"
+
+depends_on:
+  - "T-CORE-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Follow Next.js App Router RSC boundaries"
+  - "Move expensive data transforms to server services"
+  - "Keep chart data precomputed server-side"
+  - "Avoid passing oversized serialized payloads to client"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Major dashboard shells are server components"
+  - "Client components limited to interactive controls/charts needing client runtime"
+  - "Removed avoidable client-side heavy transforms"
+  - "Route-level loading boundaries configured"
+  - "Initial render latency reduced for dashboard routes"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Performance target support demonstrated"
+
+commit:
+  subject: "feat(nfr): implement server component rendering optimization"
+  body:
+    - "Implements T-NFR-004"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

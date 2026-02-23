@@ -1,0 +1,46 @@
+﻿id: T-NFR-008
+title: "Memory Self-Modification Guardrails"
+type: feat
+scope: "nfr"
+goal: "Implement hard guardrails preventing uncontrolled memory and identity self-modification by AI."
+
+requirements:
+  - "REQ-NFR-010"
+
+depends_on:
+  - "T-MEMORY-004"
+  - "T-COLLAB-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Enforce at mutation boundary, not prompt-only policy"
+  - "Validate source of mutation intent (human actor vs automated)"
+  - "Add explicit allowlist for safe AI write operations (ephemeral/candidate only)"
+  - "Couple with audit alerts for suspicious promotion spikes"
+
+validation:
+  - npm run check
+
+done_when:
+  - "AI cannot directly edit SOUL/IDENTITY/MEMORY durable files"
+  - "AI cannot auto-promote candidate memory to durable in MVP"
+  - "Promotion always requires explicit Creator approval in server flow"
+  - "Guard checks enforced in server orchestration layer"
+  - "Violations are blocked and logged"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side enforcement present"
+  - "Audit/security events recorded"
+
+commit:
+  subject: "feat(nfr): implement memory self-modification guardrails"
+  body:
+    - "Implements T-NFR-008"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

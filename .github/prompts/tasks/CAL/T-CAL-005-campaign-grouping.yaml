@@ -1,0 +1,46 @@
+﻿id: T-CAL-005
+title: "Campaign Grouping & UI"
+type: feat
+scope: "cal"
+goal: "Build campaign management UI allowing creators to group calendar items into themed campaigns (product launches, seasonal arcs, themed content blocks). Campaign view on calendar highlights grouped items. Campaign detail view shows status and progress. Reference: specs/01-product-spec.md §5.4 Campaign Management."
+
+requirements:
+  - "REQ-CAL-005"
+
+depends_on:
+  - "T-CAL-001"
+  - "T-CAL-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Campaigns are workspace-scoped"
+  - "Content items linked via campaign_id"
+  - "CRUD via T-CAL-002 actions"
+  - "Suggested use cases: themed arcs, product launches, seasonal planning"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Campaign list view (Campaigns tab under Calendar)"
+  - "Campaign creation: name, description, date range"
+  - "Assign content items to campaigns"
+  - "Calendar items color-coded or badged by campaign"
+  - "Campaign detail: items list, progress (scheduled/published counts)"
+  - "Campaign filter on calendar view"
+  - "Requirement satisfied: REQ-CAL-005"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(cal): implement campaign grouping ui"
+  body:
+    - "Implements T-CAL-005"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

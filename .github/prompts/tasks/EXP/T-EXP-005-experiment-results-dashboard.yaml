@@ -1,0 +1,45 @@
+﻿id: T-EXP-005
+title: "Experiment Results Dashboard"
+type: feat
+scope: "exp"
+goal: "Build the experiment results view showing completed experiments with winner selection, confidence scores, variant comparison charts, and summary. Archive view for past experiments with searchable learnings. Reference: specs/09-experimentation-framework.md §9 Row 3."
+
+requirements:
+  - "REQ-EXP-004"
+
+depends_on:
+  - "T-EXP-003"
+  - "T-EXP-004"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Data from experiment_results + experiment_variants"
+  - "Charts pre-aggregated server-side"
+  - "Experiments immutable after completion — results are final"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Completed experiment detail: winning variant, confidence badge, delta %"
+  - "Variant comparison chart (side-by-side performance)"
+  - "Statistical summary text"
+  - "Archive list: searchable by hypothesis, agent, date"
+  - "Learning notes editable per experiment"
+  - "Export learning summary"
+  - "Requirement satisfied: REQ-EXP-004"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(exp): implement experiment results dashboard"
+  body:
+    - "Implements T-EXP-005"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

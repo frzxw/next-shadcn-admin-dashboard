@@ -1,0 +1,45 @@
+﻿id: T-MEMORY-007
+title: "Error-to-Post/Insight Linking Service"
+type: feat
+scope: "memory"
+goal: "Implement linking between mistakes/errors and the posts and insights that surfaced them. When a mistake is detected from a post's scoring anomaly or insight threshold breach, the link is recorded for drill-down navigation. Reference: specs/08-memory-system.md §7, specs/02-requirements.md REQ-MEMORY-006."
+
+requirements:
+  - "REQ-MEMORY-006"
+
+depends_on:
+  - "T-MEMORY-005"
+  - "T-CONTENT-002"
+  - "T-INSIGHT-001"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "mistakes.post_id FK to posts"
+  - "Additional metadata field for insight_reference (jsonb)"
+  - "Bidirectional navigation in UI"
+  - "Linking occurs during auto-detection or manual assignment"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Mistake records linked to source post_id"
+  - "Mistake records linked to triggering insight/KPI anomaly"
+  - "Navigation: mistake → post drill-down"
+  - "Navigation: post drill-down → related mistakes"
+  - "Impact analysis: mistakes linked to performance delta"
+  - "Requirement satisfied: REQ-MEMORY-006"
+  - "Type-safe"
+  - "No console errors"
+
+commit:
+  subject: "feat(memory): implement error-to-postinsight linking service"
+  body:
+    - "Implements T-MEMORY-007"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

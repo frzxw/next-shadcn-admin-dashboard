@@ -1,0 +1,45 @@
+﻿id: T-AI-004
+title: "Hook Generation UI Integration"
+type: feat
+scope: "ai"
+goal: "Integrate hook generation UI into draft workflow with generate button, loading state, streaming/partial support if available, and selection actions."
+
+requirements:
+  - "REQ-AI-001"
+
+depends_on:
+  - "T-AI-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Use shared card/list primitives"
+  - "Keep UI responsive during generation"
+  - "Guard action by role gate"
+  - "No custom design tokens"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Generate hooks action available in draft editor"
+  - "Displays 3–7 hook candidates with scores"
+  - "Supports regenerate action"
+  - "Selected hook can be applied to draft"
+  - "Loading, error, and retry states implemented"
+  - "Trace info optionally viewable in debug panel"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(ai): implement hook generation ui integration"
+  body:
+    - "Implements T-AI-004"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

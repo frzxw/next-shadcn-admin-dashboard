@@ -1,0 +1,48 @@
+﻿id: T-ASSET-002
+title: "Asset Upload & Storage Service"
+type: feat
+scope: "asset"
+goal: "Implement the asset upload and storage service at `src/server/services/storage/storage.ts`. Handles file uploads to S3-compatible object storage, generates file_url, extracts basic metadata, and creates asset DB record with tags. Reference: specs/03-architecture.md §5.2."
+
+requirements:
+  - "REQ-ASSET-001"
+
+depends_on:
+  - "T-ASSET-001"
+
+allowed_paths:
+  - src\server\services\storage/
+
+constraints:
+  - "Storage adapter at `src/server/services/storage/storage.ts`"
+  - "Keep metadata in DB, binary in object storage (specs/03-architecture.md §5.2)"
+  - "File type validation (images, videos)"
+  - "Size limits enforced"
+  - "Zod validation on metadata/tags"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Upload endpoint/action accepts file + metadata + tags"
+  - "File stored in S3-compatible storage"
+  - "Asset record created in DB with file_url"
+  - "Basic metadata extracted (file type, size)"
+  - "Tags associated on upload"
+  - "Permission: Creator + Editor"
+  - "Audit log for uploads"
+  - "Requirement satisfied: REQ-ASSET-001"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(asset): implement asset upload storage service"
+  body:
+    - "Implements T-ASSET-002"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

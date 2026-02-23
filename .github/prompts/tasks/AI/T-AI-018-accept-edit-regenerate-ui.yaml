@@ -1,0 +1,45 @@
+﻿id: T-AI-018
+title: "Accept/Edit/Regenerate AI Output Actions"
+type: feat
+scope: "ai"
+goal: "Implement standardized action controls for AI outputs: accept, edit, regenerate."
+
+requirements:
+  - "REQ-AI-008"
+
+depends_on:
+  - "T-AI-004"
+  - "T-AI-007"
+  - "T-AI-010"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Reuse common action component across AI features"
+  - "Keep state transitions explicit and user-confirmed"
+  - "Audit accepted outputs when persisted as mutations"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Every AI output card includes accept, edit, regenerate controls"
+  - "Accept persists selected output to relevant entity"
+  - "Edit supports inline modifications before save"
+  - "Regenerate triggers same feature with traceable new call"
+  - "Action outcomes are deterministic and auditable"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(ai): implement accepteditregenerate ai output actions"
+  body:
+    - "Implements T-AI-018"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

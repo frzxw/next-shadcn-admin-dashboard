@@ -1,0 +1,46 @@
+﻿id: T-COLLAB-004
+title: "Workspace Member Management Actions"
+type: feat
+scope: "collab"
+goal: "Implement server actions for workspace member invite, role update, and removal. Restrict membership management to Creator role."
+
+requirements:
+  - "REQ-COLLAB-001"
+
+depends_on:
+  - "T-CORE-001"
+  - "T-COLLAB-002"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Workspace scoping mandatory on all membership operations"
+  - "Prevent removing last Creator without replacement"
+  - "Use zod schemas for payload validation"
+  - "Protect against self-demotion edge case"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`inviteMember`, `updateMemberRole`, `removeMember` actions implemented"
+  - "Creator-only enforcement for all membership mutations"
+  - "Role changes validated against allowed role enum"
+  - "Membership list query provided for settings UI"
+  - "Audit log written for role and membership changes"
+  - "Requirement satisfied"
+  - "Type-safe"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded"
+
+commit:
+  subject: "feat(collab): implement workspace member management actions"
+  body:
+    - "Implements T-COLLAB-004"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

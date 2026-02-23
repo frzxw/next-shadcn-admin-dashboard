@@ -1,0 +1,52 @@
+﻿id: T-AUD-006
+title: "Audience Intelligence Dashboard UI"
+type: feat
+scope: "aud"
+goal: "Build the Audience page with Tier 2 tabs: Segments, Loyalty, Behavior, Feedback. Display new vs returning segment breakdown, loyalty index trend, comment depth distribution, feedback theme clusters with sentiment, and AI-complaint indicators. Reference: specs/01-product-spec.md §5.6, specs/04-information-architecture.md §2."
+
+requirements:
+  - "REQ-AUD-001"
+  - "REQ-AUD-002"
+  - "REQ-AUD-004"
+
+depends_on:
+  - "T-AUD-001"
+  - "T-AUD-002"
+  - "T-AUD-004"
+  - "T-CORE-003"
+
+allowed_paths:
+  - src/
+
+constraints:
+  - "Data from audience_segments, audience_feedback_clusters, agent_kpi_snapshots"
+  - "Bento layout cards"
+  - "Charts pre-aggregated server-side"
+  - "Tabs max 6, persisted in URL (specs/04-information-architecture.md §2)"
+
+validation:
+  - npm run check
+
+done_when:
+  - "Segments tab: pie/bar chart of new vs returning vs high_depth vs trend_traffic"
+  - "Loyalty tab: loyalty index trend chart + current value"
+  - "Behavior tab: comment depth distribution, engagement depth metrics"
+  - "Feedback tab: theme cluster cards with sentiment badges + occurrence counts"
+  - "AI complaint badge visible if detected"
+  - "Agent-scoped, filtered by global context"
+  - "Loading/empty states on all cards"
+  - "Responsive"
+  - "Requirement satisfied: REQ-AUD-001, REQ-AUD-002, REQ-AUD-004"
+  - "Type-safe"
+  - "No console errors"
+  - "UI follows shared UI primitives rules"
+
+commit:
+  subject: "feat(aud): implement audience intelligence dashboard ui"
+  body:
+    - "Implements T-AUD-006"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true

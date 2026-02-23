@@ -1,0 +1,49 @@
+﻿id: T-AGENT-002
+title: "Agent CRUD Server Actions"
+type: feat
+scope: "agent"
+goal: "Implement server actions for agent create, read, update, and archive operations at `src/server/actions/agents.actions.ts`. Each mutation validates session, checks RBAC permissions (Creator role for create/archive), validates input with zod schemas, and logs audit events. Reference: specs/03-architecture.md §3.2, specs/10-permissions-matrix.md §4.1."
+
+requirements:
+  - "REQ-AGENT-001"
+
+depends_on:
+  - "T-AGENT-001"
+  - "T-COLLAB-002"
+  - "T-AUDIT-001"
+
+allowed_paths:
+  - src\server\actions/
+
+constraints:
+  - "Agent creation must create stub SOUL.md, IDENTITY.md, USER.md, MEMORY.md files"
+  - "Permission enforcement at server level (specs/10-permissions-matrix.md §5.1)"
+  - "Audit logging for create/archive/update (specs/11-audit-traceability.md §3.1)"
+  - "Editor cannot change agent type or archive (conditional permission)"
+
+validation:
+  - npm run check
+
+done_when:
+  - "`createAgent` server action: validates Creator role, creates agent + initial identity file stubs"
+  - "`updateAgent` server action: validates Creator/Editor role, updates metadata"
+  - "`archiveAgent` server action: validates Creator role, soft-delete via status"
+  - "`getAgent` / `listAgents` server actions: workspace-scoped reads"
+  - "All mutations log audit events"
+  - "Input validated with zod schemas"
+  - "Returns typed responses"
+  - "Requirement satisfied: REQ-AGENT-001"
+  - "Type-safe with zod validation"
+  - "No console errors"
+  - "Server-side permission enforcement present"
+  - "Audit event recorded for mutations"
+
+commit:
+  subject: "feat(agent): implement agent crud server actions"
+  body:
+    - "Implements T-AGENT-002"
+
+handoff:
+  require_status: true
+  require_diff: true
+  require_validation_output: true
