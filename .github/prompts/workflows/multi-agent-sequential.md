@@ -10,6 +10,10 @@ This playbook is for running 2+ Codex agents in parallel while keeping each comm
 ## 2) Prepare Worktrees
 Use `scripts/setup-codex-worktrees.ps1` to create worker worktrees and branches.
 
+## 2.5) Seed Completion State
+- Keep completed task IDs in `workflows/completed-tasks.txt`.
+- One task ID per line.
+
 ## 3) Create Task Cards
 - Use `templates/task-card.template.yaml`.
 - One card = one commit-sized unit.
@@ -23,6 +27,34 @@ Use `scripts/setup-codex-worktrees.ps1` to create worker worktrees and branches.
 4. Wait for worker handoff outputs.
 5. Rebase worker on integration branch.
 6. Merge with `--ff-only` when possible.
+
+### Automated Assignment
+Generate a coordinator snapshot with:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/assign-codex-tasks.ps1 `
+	-BoardPath .github/prompts/workflows/task-board.example.yaml `
+	-CompletedPath .github/prompts/workflows/completed-tasks.txt `
+	-OutputPath .github/prompts/workflows/assignments.current.md
+```
+
+Open `workflows/assignments.current.md` and dispatch tasks to workers.
+
+### Automated Worker Launch
+After assignments are generated and worker worktrees exist:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/start-codex-workers.ps1 `
+	-AssignmentsPath .github/prompts/workflows/assignments.current.md `
+	-WorkerTemplatePath .github/prompts/templates/worker-parallel.template.md
+```
+
+Dry-run (prepare prompts only, no Codex launch):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File scripts/start-codex-workers.ps1 `
+	-NoLaunch
+```
 
 ## 5) Worker Loop
 1. Execute one task card only.
@@ -52,3 +84,10 @@ git merge --ff-only agent/a
 - All task cards merged into integration branch.
 - Integration checks pass.
 - Final PR from integration branch to `main`.
+
+## 9) Fast Operating Cycle
+1. Update `completed-tasks.txt`.
+2. Run `assign-codex-tasks.ps1`.
+3. Dispatch tasks to workers.
+4. Merge completed worker commits.
+5. Repeat.
